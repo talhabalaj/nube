@@ -1,6 +1,7 @@
 package nube
 
 import (
+	"encoding/json"
 	"net"
 )
 
@@ -33,5 +34,16 @@ func (writer *ResponseWriter) Status(code int) *ResponseWriter {
 
 func (writer* ResponseWriter) Send(str string) {
 	writer.response.WriteBody([]byte(str), "text/plain")
+	writer.conn.Write(writer.response.ToBytes())
+}
+
+func (writer* ResponseWriter) Json(a any) {
+	parsed, err := json.Marshal(a)
+
+	if err != nil {
+		panic(err)
+	}
+
+	writer.response.WriteBody(parsed, "application/json")
 	writer.conn.Write(writer.response.ToBytes())
 }
