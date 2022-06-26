@@ -1,0 +1,2 @@
+# Nube
+Nube is a web-server built using go's net package. It's a learning project to learn go. It's inspired by Node.js's http module. It's a simple web-server. Doesn't do much. It's just a learning project.
